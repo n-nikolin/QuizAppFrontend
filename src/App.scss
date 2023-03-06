@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.choices-list-item {
+  display: block;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+section {
+  width: 90%;
+  max-width: 75ch;
+  margin: auto;
+  border: solid black;
+}
