@@ -14,7 +14,7 @@ const Header = () => {
       </Link>
       <Searchbar />
       <div className="new-quiz">
-        <Link to='/quizes/new'>
+        <Link to='/quizzes/new'>
         <button>
           <BsPlus />
         </button>

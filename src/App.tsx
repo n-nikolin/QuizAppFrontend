@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import QuizList from "./components/QuizList";
 import QuizCreator from "./components/QuizCreator";
 import QuizItemPage from "./components/QuizItemPage";
+import QuizResult from "./components/QuizResult";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<QuizList />} />
-            <Route path="/quizes">
+            <Route path="/quizzes">
               <Route path="new" element={<QuizCreator />} />
               <Route path=":id" element={<QuizItemPage />} />
+              <Route path=":id/results" element={<QuizResult/>} />
             </Route>
           </Routes>
         </Layout>

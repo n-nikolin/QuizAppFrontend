@@ -7,7 +7,7 @@ const QuizItem: FC = ({ quiz, index }: any) => {
       className="quiz-item"
       id={`quiz-item-${index}`}
     >
-      <Link to={'/quizes/'+quiz.id}>
+      <Link to={'/quizzes/'+quiz.id}>
       <h3>{quiz.title}</h3>
       </Link>
       <p>{quiz.description}</p>

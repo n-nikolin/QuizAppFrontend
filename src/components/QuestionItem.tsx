@@ -31,6 +31,7 @@ const QuestionItem: FC<IQuestion> = ({
                     }));
                     console.log(userChoices);
                   }}
+                  required //needs to be custom
                 />
                 <label htmlFor={choice.id + "-choice"}>{choice.text}</label>
               </li>

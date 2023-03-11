@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { IQuestion, IQuiz } from "../types/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import QuestionsList from "./QuestionsList";
 
 interface QuizItemPageParams {
@@ -13,7 +13,7 @@ const QuizItemPage: FC = () => {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const params = useParams<keyof QuizItemPageParams>();
   const [userChoices, setUserChoices] = useState({});
-  const [result, setResult] = useState({});
+  const navigate = useNavigate();
 
   async function fetchData() {
     try {
@@ -55,7 +55,8 @@ const QuizItemPage: FC = () => {
         onSubmit={(e) => {
           e.preventDefault();
           console.log(userChoices);
-          getResult()
+          // getResult();
+          navigate("results", { state: { userChoices, quiz_id:quiz.id } });
         }}
       >
         <QuestionsList
