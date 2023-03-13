@@ -53,9 +53,56 @@ const QuizCreator = () => {
     setNewQuiz(temp);
   };
 
+  const addNewResult = (e) => {
+    let temp = { ...newQuiz };
+    temp.results.push({ title: "", description: "", value: 0 });
+    setNewQuiz(temp);
+  };
+
+  const deleteResult = (e, i) => {
+    let temp = { ...newQuiz };
+    temp.results.splice(i, 1);
+    setNewQuiz(temp);
+  };
+
+  const addQuestion = (e) => {
+    let temp = { ...newQuiz };
+    temp.questions.push({ text: "", choices: [{ text: "", value: "" }, { text: "", value: "" }] });
+    setNewQuiz(temp)
+  };
+
+  const deleteQuestion = (e, i) => {
+    let temp = { ...newQuiz };
+    console.log(e, i);
+    temp.questions.splice(i, 1);
+    setNewQuiz(temp);
+  };
+
+  const addChoice = (e, i) => {
+    let temp = { ...newQuiz };
+    temp.questions[i].choices.push({ text: "", value: 0 });
+    setNewQuiz(temp);
+  };
+
+  const deleteChoice = (e, i, j) => {
+    let temp = { ...newQuiz };
+    temp.questions[i].choices.splice(j, 1);
+    setNewQuiz(temp);
+  };
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newQuiz);
+  };
+
   return (
     <section className="quiz-creator">
-      <form action="submit" className="quiz-creator-form">
+      <form
+        action="submit"
+        className="quiz-creator-form"
+        onSubmit={handleSubmit}
+      >
         <div>
           <label htmlFor="quizTitle" className="new-quiz-title">
             <h3>Quiz Title</h3>
@@ -78,12 +125,14 @@ const QuizCreator = () => {
             onChange={handleQuizChange}
           />
         </div>
+        <br />
         <div>
           <label htmlFor="" className="new-quiz-description">
             <h3>Questions</h3>
           </label>
           {newQuiz.questions.map((question, i) => (
             <div key={"question_" + i}>
+              <br />
               <label htmlFor="">
                 <h4>{i + 1}</h4>
               </label>
@@ -92,6 +141,7 @@ const QuizCreator = () => {
                 value={newQuiz.questions[i].text}
                 onChange={(e) => handleQuestionChange(e, i)}
               />
+              <button onClick={(e) => deleteQuestion(e, i)}>X</button>
               <h3>Choices</h3>
               <div className="choices-list">
                 <ul>
@@ -113,17 +163,26 @@ const QuizCreator = () => {
                         onChange={(e) => handleChoicesChange(e, i, j)}
                       />{" "}
                       {/* {choice.value} */}
+                      <button onClick={(e) => deleteChoice(e, i, j)}>X</button>
                     </li>
                   ))}
                 </ul>
+                <button
+                  className="add-new-choice"
+                  onClick={(e) => addChoice(e, i)}
+                >
+                  <BsPlusLg />
+                  <label htmlFor="">add new choice</label>
+                </button>
               </div>
             </div>
           ))}
+          <br />
         </div>
         <div>
           <button className="add-new-question">
             <BsPlusLg />
-            <label htmlFor="">add new question</label>
+            <label htmlFor="" onClick={addQuestion}>add new question</label>
           </button>
           <div className="quiz-results">
             <h3>Results</h3>
@@ -132,7 +191,14 @@ const QuizCreator = () => {
                 {newQuiz.results.map((result, i) => {
                   return (
                     <li key={"result_" + i}>
-                      <label htmlFor="">text</label>
+                      <label htmlFor="">title:</label>
+                      <input
+                        type="text"
+                        name="title"
+                        value={newQuiz.results[i].title}
+                        onChange={(e) => handleResultsChange(e, i)}
+                      />
+                      <label htmlFor="">description</label>
                       <textarea
                         name="description"
                         value={newQuiz.results[i].description}
@@ -145,17 +211,19 @@ const QuizCreator = () => {
                         value={newQuiz.results[i].value}
                         onChange={(e) => handleResultsChange(e, i)}
                       />
+                      <button onClick={(e) => deleteResult(e, i)}>X</button>
                     </li>
                   );
                 })}
               </ul>
             </div>
-            <button className="add-new-question">
+            <button className="add-new-question" onClick={addNewResult}>
               <BsPlusLg />
               <label htmlFor="">add results</label>
             </button>
           </div>
         </div>
+        <button type="submit">Create New Quiz</button>
       </form>
     </section>
   );
