@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -18,5 +18,17 @@ section {
   max-width: 75ch;
   margin: auto;
   border: solid black;
+  padding: 0.5rem;
 }
 
+.quiz-creator {
+  display: grid;
+  form {
+    div {
+      width: 100%;
+      textarea, input{
+        // float: right
+      }
+    }
+  }
+}
