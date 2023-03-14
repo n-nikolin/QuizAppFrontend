@@ -5,6 +5,7 @@ import QuizList from "./components/QuizList";
 import QuizCreator from "./components/QuizCreator";
 import QuizItemPage from "./components/QuizItemPage";
 import QuizResult from "./components/QuizResult";
+import QuizCreatedPage from "./components/QuizCreatedPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<QuizList />} />
             <Route path="/quizzes">
               <Route path="new" element={<QuizCreator />} />
+              <Route path="created/:id" element={<QuizCreatedPage />} />
               <Route path=":id" element={<QuizItemPage />} />
               <Route path=":id/results" element={<QuizResult/>} />
             </Route>

@@ -1,34 +1,37 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { BsPlusLg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const initialValue = {
-  title: "test quiz",
-  description:
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita tempora aspernatur officiis natus exercitationem rem corporis earum dicta beatae doloribus non cum vel sunt assumenda, soluta corrupti suscipit quisquam. Eligendi.",
+  title: "",
+  description: "",
   questions: [
     {
-      text: "is this running properly?",
+      text: "",
       choices: [
-        { text: "yes", value: 1 },
-        { text: "no", value: 0 },
+        { text: "", value: 1 },
+        { text: "", value: 0 },
       ],
     },
     {
-      text: "is this thing running properly?",
+      text: "",
       choices: [
-        { text: "yes!", value: 1 },
-        { text: "no!", value: 0 },
+        { text: "", value: 1 },
+        { text: "", value: 0 },
       ],
     },
   ],
   results: [
-    { title: "niiice!", description: "hell yeah!", value: 1 },
-    { title: "fuck!!!", description: "hell noooo!", value: 0 },
+    { title: "", description: "", value: 1 },
+    { title: "", description: "", value: 0 },
   ],
 };
 
 const QuizCreator = () => {
   const [newQuiz, setNewQuiz] = useState(initialValue);
+  // navigate to quiz created page on submit
+  const navigate = useNavigate()
 
   const handleQuizChange = (e) => {
     // console.log(e.target.name, e.target.value);
@@ -67,8 +70,14 @@ const QuizCreator = () => {
 
   const addQuestion = (e) => {
     let temp = { ...newQuiz };
-    temp.questions.push({ text: "", choices: [{ text: "", value: "" }, { text: "", value: "" }] });
-    setNewQuiz(temp)
+    temp.questions.push({
+      text: "",
+      choices: [
+        { text: "", value: "" },
+        { text: "", value: "" },
+      ],
+    });
+    setNewQuiz(temp);
   };
 
   const deleteQuestion = (e, i) => {
@@ -90,10 +99,12 @@ const QuizCreator = () => {
     setNewQuiz(temp);
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(newQuiz);
+    axios.post("http://localhost:8000/quizzes/", newQuiz).then((response) => {
+      console.log(response.data);
+    });
   };
 
   return (
@@ -182,7 +193,9 @@ const QuizCreator = () => {
         <div>
           <button className="add-new-question">
             <BsPlusLg />
-            <label htmlFor="" onClick={addQuestion}>add new question</label>
+            <label htmlFor="" onClick={addQuestion}>
+              add new question
+            </label>
           </button>
           <div className="quiz-results">
             <h3>Results</h3>
