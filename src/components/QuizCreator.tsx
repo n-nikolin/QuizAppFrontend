@@ -31,7 +31,7 @@ const initialValue = {
 const QuizCreator = () => {
   const [newQuiz, setNewQuiz] = useState(initialValue);
   // navigate to quiz created page on submit
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleQuizChange = (e) => {
     // console.log(e.target.name, e.target.value);
@@ -99,12 +99,18 @@ const QuizCreator = () => {
     setNewQuiz(temp);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(newQuiz);
-    axios.post("http://localhost:8000/quizzes/", newQuiz).then((response) => {
-      console.log(response.data);
-    });
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/quizzes/",
+        newQuiz
+      );
+      console.log(response);
+      navigate("created", { state: {title: newQuiz.title, quiz_id: response.data.id } });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
