@@ -18,7 +18,7 @@ function App() {
               <Route path="new" element={<QuizCreator />} />
               <Route path="new/created" element={<QuizCreatedPage />} />
               <Route path=":id" element={<QuizItemPage />} />
-              <Route path=":id/results" element={<QuizResult/>} />
+              <Route path=":id/results" element={<QuizResult />} />
             </Route>
           </Routes>
         </Layout>

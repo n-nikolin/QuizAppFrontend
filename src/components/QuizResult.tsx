@@ -25,14 +25,15 @@ const QuizResult = () => {
 
   return (
     <section className="quiz-results">
-        {results.map((result)=>{
-            return(
-                <div className="quiz-results-item" key={result.id}>
-                    <h1>{result.title}</h1>
-                    <p>{result.description}</p>
-                </div>
-            )
-        })}    </section>
+      {results.map((result) => {
+        return (
+          <div className="quiz-results-item" key={result.id}>
+            <h1>{result.title}</h1>
+            <p>{result.description}</p>
+          </div>
+        );
+      })}{" "}
+    </section>
   );
 };
 

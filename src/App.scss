@@ -1,10 +1,13 @@
+// VARIABLES
+
+// BASIC STUFF
 * {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
@@ -25,12 +28,52 @@ section {
   padding: 0.5rem;
 }
 
+// QUIZ LIST
+
+.quiz-item {
+  border: solid;
+  margin-bottom: 0.3rem;
+  .quiz-item-date {
+    label {
+      font-weight: 600;
+    }
+  }
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// quiz item page
+.page {
+  background-color: aquamarine;
+  overflow: scroll;
+  // overflow: hidden;
+  .quiz-form-container, .questions-list {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, calc(100%));
+    grid-template-rows: minmax(150px, 1fr);
+    // padding: 0 20px;
+    .questions-item {
+      width: 100%;
+      border: solid red;
+    }
+  }
+  .quiz-item-legend {
+    width: 100%;
+      border: solid red;
+  }
+}
+
+// QUIZ CREATOR
 .quiz-creator {
   display: grid;
   form {
     div {
       width: 100%;
-      textarea, input{
+      textarea,
+      input {
         // float: right
       }
     }

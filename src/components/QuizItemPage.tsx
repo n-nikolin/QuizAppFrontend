@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { IQuestion, IQuiz } from "../types/types";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ const QuizItemPage: FC = () => {
   const params = useParams<keyof QuizItemPageParams>();
   const [userChoices, setUserChoices] = useState({});
   const navigate = useNavigate();
+  const questionRefs = useRef([]);
 
   async function fetchData() {
     try {
@@ -42,32 +43,56 @@ const QuizItemPage: FC = () => {
 
   useEffect(() => {
     fetchData();
+    // console.log(questionRefs.current)
   }, []);
 
+  const handleStartQuiz = (e) => {
+    e.preventDefault();
+    questionRefs.current[0].scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  };
+
   return (
-    <section className="quiz-page">
-      <h3>{quiz.title}</h3>
-      <p>{quiz.description}</p>
-      <span>{quiz.created?.toString() || ""}</span>
-      <span>{quiz.edited?.toString() || ""}</span>
+    <section className="quiz-item page">
       <form
         action="submit"
         onSubmit={(e) => {
           e.preventDefault();
           console.log(userChoices);
           // getResult();
-          navigate("results", { state: { userChoices, quiz_id:quiz.id } });
+          navigate("results", { state: { userChoices, quiz_id: quiz.id } });
         }}
       >
-        <QuestionsList
-          questions={questions}
-          userChoices={userChoices}
-          setUserChoices={setUserChoices}
-        />
-        {/* submit btn */}
-        <button type="submit" className="submit-btn">
-          submit
-        </button>
+        <div className="quiz-form-container">
+          <div className="quiz-item-legend">
+            <h3>{quiz.title}</h3>
+            <p>{quiz.description}</p>
+            <div className="quiz-item-date">
+              <label htmlFor="">
+                Posted:
+                <span>{new Date(quiz.created).toLocaleString()}</span>
+              </label>
+              <label htmlFor="">Edited: </label>
+              <span>{new Date(quiz.edited).toLocaleString()}</span>
+            </div>
+            <button className="start-quiz" onClick={handleStartQuiz}>
+              START QUIZ
+            </button>
+          </div>
+          <QuestionsList
+            questions={questions}
+            userChoices={userChoices}
+            setUserChoices={setUserChoices}
+            questionRefs={questionRefs}
+          />
+        </div>
+        <div>
+          <button type="submit" className="submit-btn">
+            submit
+          </button>
+        </div>
       </form>
     </section>
   );

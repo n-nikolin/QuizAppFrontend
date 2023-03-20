@@ -107,7 +107,9 @@ const QuizCreator = () => {
         newQuiz
       );
       console.log(response);
-      navigate("created", { state: {title: newQuiz.title, quiz_id: response.data.id } });
+      navigate("created", {
+        state: { title: newQuiz.title, quiz_id: response.data.id },
+      });
     } catch (error) {
       console.log(error);
     }
