@@ -53,23 +53,11 @@ const QuestionItem: FC<IQuestion> = forwardRef(
               );
             })}
           </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleNext(i);
-            }}
-          >
-            next
-          </button>
-
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handlePrev(i);
-            }}
-          >
-            prev
-          </button>
+          {/* 
+          consitional logic for buttons
+          no PREVIOUS button on first question,
+          instead of  NEXT button on last question render SUBMIT button
+          */}
         </div>
       </div>
     );

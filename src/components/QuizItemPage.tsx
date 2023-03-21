@@ -51,6 +51,7 @@ const QuizItemPage: FC = () => {
     questionRefs.current[0].scrollIntoView({
       behavior: "smooth",
       block: "end",
+      inline:'nearest'
     });
   };
 
@@ -87,11 +88,6 @@ const QuizItemPage: FC = () => {
             setUserChoices={setUserChoices}
             questionRefs={questionRefs}
           />
-        </div>
-        <div>
-          <button type="submit" className="submit-btn">
-            submit
-          </button>
         </div>
       </form>
     </section>

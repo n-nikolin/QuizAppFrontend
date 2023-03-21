@@ -47,22 +47,23 @@ section {
 // quiz item page
 .page {
   background-color: aquamarine;
-  overflow: scroll;
-  // overflow: hidden;
-  .quiz-form-container, .questions-list {
+  overflow: hidden;
+  .quiz-form-container,
+  .questions-list {
+    position: relative;
     display: grid;
-    grid-gap: 10px;
     grid-template-columns: repeat(6, calc(100%));
     grid-template-rows: minmax(150px, 1fr);
-    // padding: 0 20px;
-    .questions-item {
-      width: 100%;
-      border: solid red;
-    }
-  }
-  .quiz-item-legend {
+    grid-gap: 0rem;
     width: 100%;
-      border: solid red;
+    margin: 0.5rem;
+  }
+  .quiz-item-legend{
+    margin: 0.5rem;
+  }
+  .submit-btn {
+    border: solid red;
+    width: fit-content;
   }
 }
 
