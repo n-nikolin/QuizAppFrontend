@@ -3,7 +3,7 @@ import axios from "axios";
 import QuizItem from "./QuizItem";
 import { IQuiz } from "../../types/types";
 
-const QuizList: FC = () => {
+const QuizList: FC<IQuiz[]> = () => {
   const [quizList, setQuizList] = useState<IQuiz[]>([]);
   useEffect(() => {
     axios
@@ -16,6 +16,7 @@ const QuizList: FC = () => {
   return (
     <section className="main">
       <ul className="quiz-list">
+        {/* {quizList.map((quiz: IQuiz, index: number) => { */}
         {quizList.map((quiz, index) => {
           return (
             <QuizItem

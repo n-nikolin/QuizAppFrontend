@@ -8,13 +8,13 @@ interface QuizItemPageParams {
   id: number;
 }
 
-const QuizItemPage: FC = () => {
-  const [quiz, setQuiz] = useState<IQuiz>({});
+const QuizItemPage = () => {
+  const [quiz, setQuiz] = useState<IQuiz | Record<string, never>>({});
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const params = useParams<keyof QuizItemPageParams>();
   const [userChoices, setUserChoices] = useState({});
   const navigate = useNavigate();
-  const questionRefs = useRef([]);
+  const questionRefs = useRef<any>([]); //find appropriate type for list of refs
 
   async function fetchData() {
     try {
@@ -46,12 +46,12 @@ const QuizItemPage: FC = () => {
     // console.log(questionRefs.current)
   }, []);
 
-  const handleStartQuiz = (e) => {
+  const handleStartQuiz = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    questionRefs.current[0].scrollIntoView({
+    questionRefs.current[0]?.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline:'nearest'
+      inline: "nearest",
     });
   };
 

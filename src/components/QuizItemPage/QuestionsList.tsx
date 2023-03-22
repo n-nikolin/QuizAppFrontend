@@ -2,21 +2,28 @@ import React, { FC, useState, useRef } from "react";
 import { IChoice, IQuestion } from "../../types/types";
 import QuestionItem from "./QuestionItem";
 
-const QuestionsList: FC<IQuestion[]> = ({
+type QuestionsListProps = {
+  questions: IQuestion[];
+  userChoices: {};
+  setUserChoices: React.Dispatch<React.SetStateAction<{}>>;
+  questionRefs: React.MutableRefObject<[]>;
+};
+
+const QuestionsList: FC<QuestionsListProps> = ({
   questions,
   userChoices,
   setUserChoices,
   questionRefs,
 }) => {
-  const handleNext = (id) => {
+  const handleNext = (id: number) => {
     questionRefs.current[id + 1].scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline:'start'
+      inline: "start",
     });
   };
 
-  const handlePrev = (id) => {
+  const handlePrev = (id: number) => {
     questionRefs.current[id - 1].scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -33,7 +40,6 @@ const QuestionsList: FC<IQuestion[]> = ({
               {i + 1}/{questions.length}
             </div>
             <QuestionItem
-              i={i}
               ref={questionRefs}
               key={question.id}
               id={question.id}
@@ -41,8 +47,6 @@ const QuestionsList: FC<IQuestion[]> = ({
               choices={question.choices}
               userChoices={userChoices}
               setUserChoices={setUserChoices}
-              handleNext={handleNext}
-              handlePrev={handlePrev}
             />
             {i > 0 && (
               <button

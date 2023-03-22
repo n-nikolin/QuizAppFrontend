@@ -1,7 +1,13 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import { IQuiz } from "../../types/types";
 
-const QuizItem: FC = ({ quiz, index }: any) => {
+type QuizItemProps = {
+  quiz: IQuiz;
+  index: number;
+};
+
+const QuizItem: FC<QuizItemProps> = ({ quiz, index }) => {
   return (
     <li className="quiz-item" id={`quiz-item-${index}`}>
       <Link to={"/quizzes/" + quiz.id}>

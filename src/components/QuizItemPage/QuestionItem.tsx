@@ -1,21 +1,16 @@
 import React, { FC, useState, forwardRef } from "react";
-import { IQuestion } from "../../types/types";
 import { IChoice } from "../../types/types";
 
-const QuestionItem: FC<IQuestion> = forwardRef(
-  (
-    {
-      id,
-      text,
-      choices,
-      userChoices,
-      setUserChoices,
-      i,
-      handleNext,
-      handlePrev,
-    },
-    ref
-  ) => {
+type QuestionItemProps = {
+  id: number;
+  text: string;
+  choices: IChoice[];
+  userChoices: {};
+  setUserChoices: React.Dispatch<React.SetStateAction<{}>>;
+};
+
+const QuestionItem: FC<QuestionItemProps> = forwardRef(
+  ({ id, text, choices, userChoices, setUserChoices }, ref) => {
     return (
       <div
         key={id}
@@ -53,11 +48,6 @@ const QuestionItem: FC<IQuestion> = forwardRef(
               );
             })}
           </div>
-          {/* 
-          consitional logic for buttons
-          no PREVIOUS button on first question,
-          instead of  NEXT button on last question render SUBMIT button
-          */}
         </div>
       </div>
     );

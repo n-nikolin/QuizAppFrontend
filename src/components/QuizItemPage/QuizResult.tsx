@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { IResult } from "../../types/types";
 
-const QuizResult = () => {
+const QuizResult: FC<IResult[]> = () => {
   const location = useLocation();
   const [results, setResults] = useState([]);
   async function getResults() {
@@ -25,14 +26,14 @@ const QuizResult = () => {
 
   return (
     <section className="quiz-results">
-      {results.map((result) => {
+      {results.map((result: IResult) => {
         return (
           <div className="quiz-results-item" key={result.id}>
             <h1>{result.title}</h1>
             <p>{result.description}</p>
           </div>
         );
-      })}{" "}
+      })}
     </section>
   );
 };
