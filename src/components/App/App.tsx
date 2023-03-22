@@ -1,11 +1,11 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import QuizList from "./components/QuizList";
-import QuizCreator from "./components/QuizCreator";
-import QuizItemPage from "./components/QuizItemPage";
-import QuizResult from "./components/QuizResult";
-import QuizCreatedPage from "./components/QuizCreatedPage";
+import Layout from "../Layout/Layout";
+import QuizList from "../IndexPage/QuizList";
+import QuizCreator from "../QuizCreator/QuizCreator";
+import QuizItemPage from "../QuizItemPage/QuizItemPage";
+import QuizResult from "../QuizItemPage/QuizResult";
+import QuizCreatedPage from "../QuizCreator/QuizCreatedPage";
 
 function App() {
   return (

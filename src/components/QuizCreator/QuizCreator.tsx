@@ -38,7 +38,10 @@ const QuizCreator = () => {
     setNewQuiz({ ...newQuiz, [e.target.name]: e.target.value });
   };
 
-  const handleQuestionChange = (e, i) => {
+  const handleQuestionChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: string
+  ) => {
     let temp = { ...newQuiz };
     temp.questions[i][e.target.name] = e.target.value;
     setNewQuiz(temp);
@@ -106,7 +109,7 @@ const QuizCreator = () => {
         "http://localhost:8000/quizzes/",
         newQuiz
       );
-      console.log(response);
+      // console.log(response);
       navigate("created", {
         state: { title: newQuiz.title, quiz_id: response.data.id },
       });

@@ -1,6 +1,6 @@
 import React, { FC, useState, forwardRef } from "react";
-import { IQuestion } from "../types/types";
-import { IChoice } from "../types/types";
+import { IQuestion } from "../../types/types";
+import { IChoice } from "../../types/types";
 
 const QuestionItem: FC<IQuestion> = forwardRef(
   (

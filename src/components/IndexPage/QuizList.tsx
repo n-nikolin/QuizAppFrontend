@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import axios from "axios";
 import QuizItem from "./QuizItem";
-import { IQuiz } from "../types/types";
+import { IQuiz } from "../../types/types";
 
 const QuizList: FC = () => {
   const [quizList, setQuizList] = useState<IQuiz[]>([]);

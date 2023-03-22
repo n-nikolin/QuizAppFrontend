@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { IQuestion, IQuiz } from "../types/types";
+import { IQuestion, IQuiz } from "../../types/types";
 import { useNavigate, useParams } from "react-router-dom";
 import QuestionsList from "./QuestionsList";
 

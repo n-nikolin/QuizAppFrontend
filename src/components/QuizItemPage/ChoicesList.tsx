@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { IChoice } from "../types/types";
+import { IChoice } from "../../types/types";
 
 const ChoicesList: FC<IChoice[]> = ({ choices }) => {
   const [isChecked, setIsChecked] = useState(null);

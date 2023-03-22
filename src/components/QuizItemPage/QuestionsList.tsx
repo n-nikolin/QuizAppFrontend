@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef } from "react";
-import { IChoice, IQuestion } from "../types/types";
+import { IChoice, IQuestion } from "../../types/types";
 import QuestionItem from "./QuestionItem";
 
 const QuestionsList: FC<IQuestion[]> = ({
