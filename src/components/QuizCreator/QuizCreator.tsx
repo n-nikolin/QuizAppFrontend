@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { IQuestion, IResult } from "../../types/types";
 
 const initialValue = {
   title: "",
@@ -31,13 +30,11 @@ const initialValue = {
 
 const QuizCreator = () => {
   const [newQuiz, setNewQuiz] = useState(initialValue);
-  // navigate to quiz created page on submit
   const navigate = useNavigate();
 
   const handleQuizChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    // console.log(e.target.name, e.target.value);
     setNewQuiz({ ...newQuiz, [e.target.name]: e.target.value });
   };
 
@@ -100,8 +97,8 @@ const QuizCreator = () => {
     e: React.MouseEvent<HTMLButtonElement>,
     i: number
   ) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
-    console.log(e, i);
     temp.questions.splice(i, 1);
     setNewQuiz(temp);
   };
@@ -118,6 +115,7 @@ const QuizCreator = () => {
     i: number,
     j: number
   ) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
     temp.questions[i].choices.splice(j, 1);
     setNewQuiz(temp);
