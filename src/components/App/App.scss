@@ -20,6 +20,11 @@ a {
   text-decoration: none;
 }
 
+textarea{
+  resize: none;
+  height: 15ch;
+}
+
 section {
   width: 90%;
   max-width: 75ch;
@@ -58,7 +63,7 @@ section {
     width: 100%;
     margin: 0.5rem;
   }
-  .quiz-item-legend{
+  .quiz-item-legend {
     margin: 0.5rem;
   }
   .submit-btn {
@@ -68,4 +73,14 @@ section {
 }
 
 // QUIZ CREATOR
-
+.quiz-creator-form {
+  .title-and-description,
+  .new-quiz-questions-list,
+  .new-quiz-question-item,
+  .new-quiz-results,
+  .new-quiz-results-list,
+  .new-quiz-result-item{
+    border: red solid;
+    display: grid
+  }
+}
