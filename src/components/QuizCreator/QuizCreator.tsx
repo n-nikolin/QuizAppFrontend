@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { IQuestion, IResult } from "../../types/types";
 
 const initialValue = {
   title: "",
@@ -33,83 +34,102 @@ const QuizCreator = () => {
   // navigate to quiz created page on submit
   const navigate = useNavigate();
 
-  const handleQuizChange = (e) => {
+  const handleQuizChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     // console.log(e.target.name, e.target.value);
     setNewQuiz({ ...newQuiz, [e.target.name]: e.target.value });
   };
 
   const handleQuestionChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: string
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    i: number
   ) => {
     let temp = { ...newQuiz };
     temp.questions[i][e.target.name] = e.target.value;
     setNewQuiz(temp);
   };
 
-  const handleChoicesChange = (e, i, j) => {
+  const handleChoicesChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number,
+    j: number
+  ) => {
     let temp = { ...newQuiz };
     temp.questions[i].choices[j][e.target.name] = e.target.value;
     setNewQuiz(temp);
   };
 
-  const handleResultsChange = (e, i) => {
+  const handleResultsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    i: number
+  ) => {
     let temp = { ...newQuiz };
     temp.results[i][e.target.name] = e.target.value;
     setNewQuiz(temp);
   };
 
-  const addNewResult = (e) => {
+  const addNewResult = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
     temp.results.push({ title: "", description: "", value: 0 });
     setNewQuiz(temp);
   };
 
-  const deleteResult = (e, i) => {
+  const deleteResult = (e: React.MouseEvent<HTMLButtonElement>, i: number) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
     temp.results.splice(i, 1);
     setNewQuiz(temp);
   };
 
-  const addQuestion = (e) => {
+  const addQuestion = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
     temp.questions.push({
       text: "",
       choices: [
-        { text: "", value: "" },
-        { text: "", value: "" },
+        { text: "", value: 0 },
+        { text: "", value: 0 },
       ],
     });
     setNewQuiz(temp);
   };
 
-  const deleteQuestion = (e, i) => {
+  const deleteQuestion = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    i: number
+  ) => {
     let temp = { ...newQuiz };
     console.log(e, i);
     temp.questions.splice(i, 1);
     setNewQuiz(temp);
   };
 
-  const addChoice = (e, i) => {
+  const addChoice = (e: React.MouseEvent<HTMLButtonElement>, i: number) => {
+    e.preventDefault();
     let temp = { ...newQuiz };
     temp.questions[i].choices.push({ text: "", value: 0 });
     setNewQuiz(temp);
   };
 
-  const deleteChoice = (e, i, j) => {
+  const deleteChoice = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    i: number,
+    j: number
+  ) => {
     let temp = { ...newQuiz };
     temp.questions[i].choices.splice(j, 1);
     setNewQuiz(temp);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:8000/quizzes/",
         newQuiz
       );
-      // console.log(response);
       navigate("created", {
         state: { title: newQuiz.title, quiz_id: response.data.id },
       });
@@ -176,15 +196,13 @@ const QuizCreator = () => {
                         value={newQuiz.questions[i].choices[j].text}
                         onChange={(e) => handleChoicesChange(e, i, j)}
                       />
-                      {/* {choice.text} */}
-                      <label htmlFor="">value:</label>{" "}
+                      <label htmlFor="">value:</label>
                       <input
                         type="text"
                         name="value"
                         value={newQuiz.questions[i].choices[j].value}
                         onChange={(e) => handleChoicesChange(e, i, j)}
-                      />{" "}
-                      {/* {choice.value} */}
+                      />
                       <button onClick={(e) => deleteChoice(e, i, j)}>X</button>
                     </li>
                   ))}
@@ -202,11 +220,9 @@ const QuizCreator = () => {
           <br />
         </div>
         <div>
-          <button className="add-new-question">
+          <button className="add-new-question" onClick={addQuestion}>
             <BsPlusLg />
-            <label htmlFor="" onClick={addQuestion}>
-              add new question
-            </label>
+            <label htmlFor="">add new question</label>
           </button>
           <div className="quiz-results">
             <h3>Results</h3>
